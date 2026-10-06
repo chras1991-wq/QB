@@ -1,4 +1,4 @@
-import type { Asset, LaunchRound, Unit } from "./types";
+import type { Asset, BirthEvent, LaunchRound, Unit, WalletPreview } from "./types";
 
 export const assets: Asset[] = [
   {
@@ -53,6 +53,7 @@ export const units: Unit[] = [
     assetId: assets[0].id,
     symbol: "QX",
     serial: 0,
+    xmssIndex: 0,
     birthBlock: 872_512,
     birthTxid: "0000000000000000000000000000000000000000000000000000000000000a01",
     pqVerified: true,
@@ -63,6 +64,7 @@ export const units: Unit[] = [
     assetId: assets[0].id,
     symbol: "QX",
     serial: 481,
+    xmssIndex: 481,
     birthBlock: 875_201,
     birthTxid: "0000000000000000000000000000000000000000000000000000000000000b21",
     pqVerified: true,
@@ -73,6 +75,7 @@ export const units: Unit[] = [
     assetId: assets[2].id,
     symbol: "FIN",
     serial: 1023,
+    xmssIndex: 1023,
     birthBlock: 861_440,
     birthTxid: "0000000000000000000000000000000000000000000000000000000000000f01",
     pqVerified: true,
@@ -81,15 +84,85 @@ export const units: Unit[] = [
   },
 ];
 
+export const birthEvents: BirthEvent[] = [
+  {
+    id: "b1",
+    assetId: assets[0].id,
+    symbol: "QX",
+    serial: 2303,
+    xmssIndex: 2303,
+    block: 1_042_880,
+    txid: "a1b2c3d4e5f60718293a4b5c6d7e8f901234567890abcdefabcdefabcdefab",
+    recipient: "bc1q…8wlh",
+    policy: "block_lottery_v1",
+    at: "2 min ago",
+  },
+  {
+    id: "b2",
+    assetId: assets[0].id,
+    symbol: "QX",
+    serial: 2302,
+    xmssIndex: 2302,
+    block: 1_042_879,
+    txid: "b2c3d4e5f60718293a4b5c6d7e8f901234567890abcdefabcdefabcdefabcd",
+    recipient: "bc1p…v1m4",
+    policy: "block_lottery_v1",
+    at: "6 min ago",
+  },
+  {
+    id: "b3",
+    assetId: assets[2].id,
+    symbol: "FIN",
+    serial: 1013,
+    xmssIndex: 1013,
+    block: 861_438,
+    txid: "c3d4e5f60718293a4b5c6d7e8f901234567890abcdefabcdefabcdefabcde",
+    recipient: "bc1q…preview",
+    policy: "block_lottery_v1",
+    at: "12 min ago",
+  },
+  {
+    id: "b4",
+    assetId: assets[0].id,
+    symbol: "QX",
+    serial: 0,
+    xmssIndex: 0,
+    block: 872_512,
+    txid: "0000000000000000000000000000000000000000000000000000000000000a01",
+    recipient: "bc1p…genesis",
+    policy: "block_lottery_v1",
+    at: "epoch",
+  },
+];
+
+export const walletPreview: WalletPreview = {
+  displayBalance: "250 QX",
+  ranges: [{ assetId: assets[0].id, symbol: "QX", start: 100, end: 199 }],
+  singles: [
+    { symbol: "QX", serial: 17, assetId: assets[0].id },
+    { symbol: "QX", serial: 38, assetId: assets[0].id },
+    { symbol: "QX", serial: 481, assetId: assets[0].id },
+    { symbol: "FIN", serial: 1023, assetId: assets[2].id },
+  ],
+};
+
 export const launchRounds: LaunchRound[] = [
   {
     assetId: assets[0].id,
     symbol: "QX",
     anchorBlock: 1_042_881,
+    revealBlock: 1_042_882,
+    blockHashPreview: "0000000000000000000a91e…f3b2",
     serialStart: 2304,
     serialEnd: 2559,
+    batchSize: 256,
     participants: 18421,
     status: "open",
+    leaderboard: [
+      { rank: 1, score: "00…0a3f", claimant: "bc1q8k…2p9", serial: 2304 },
+      { rank: 2, score: "00…0b11", claimant: "bc1p3m…7aa", serial: 2305 },
+      { rank: 3, score: "00…0c88", claimant: "bc1q1z…4de", serial: 2306 },
+    ],
   },
 ];
 
@@ -103,4 +176,8 @@ export function getUnitsForAsset(assetId: string): Unit[] {
 
 export function getUnit(assetId: string, serial: number): Unit | undefined {
   return units.find((u) => u.assetId === assetId && u.serial === serial);
+}
+
+export function getBirthsForAsset(assetId: string): BirthEvent[] {
+  return birthEvents.filter((b) => b.assetId === assetId);
 }

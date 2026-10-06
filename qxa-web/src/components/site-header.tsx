@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 const links = [
-  { href: "/explorer", label: "Explorer" },
-  { href: "/launch", label: "Fair Launch" },
-  { href: "/create", label: "Create" },
-  { href: "/docs", label: "Protocol" },
+  { href: "/births", label: "Births" },
+  { href: "/roots", label: "Roots" },
+  { href: "/wallet", label: "Wallet" },
+  { href: "/launch", label: "Lottery" },
 ];
 
 export function SiteHeader() {
@@ -17,7 +17,7 @@ export function SiteHeader() {
           </span>
           <span>QXA</span>
         </Link>
-        <nav className="hidden items-center gap-6 text-sm text-zinc-400 sm:flex">
+        <nav className="hidden items-center gap-6 text-sm text-zinc-400 md:flex">
           {links.map((l) => (
             <Link key={l.href} href={l.href} className="transition hover:text-zinc-100">
               {l.label}
@@ -28,7 +28,7 @@ export function SiteHeader() {
           href="/launch"
           className="rounded-full bg-amber-500 px-3.5 py-1.5 text-xs font-semibold text-black transition hover:bg-amber-400"
         >
-          Enter Round
+          Next block
         </Link>
       </div>
     </header>

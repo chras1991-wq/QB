@@ -1,7 +1,10 @@
 import Link from "next/link";
-import { ProgressBar } from "@/components/progress-bar";
-import { assets, launchRounds } from "@/lib/data";
-import { formatNumber, formatPercent, policyLabel } from "@/lib/format";
+import { BirthFeed } from "@/components/birth-feed";
+import { MintContrast } from "@/components/mint-contrast";
+import { StateTape } from "@/components/state-tape";
+import { WalletLayers } from "@/components/wallet-layers";
+import { assets, birthEvents, launchRounds, walletPreview } from "@/lib/data";
+import { formatNumber } from "@/lib/format";
 
 export default function HomePage() {
   const featured = assets[0];
@@ -9,106 +12,74 @@ export default function HomePage() {
 
   return (
     <div className="grid-glow">
-      <section className="mx-auto max-w-6xl px-4 pb-16 pt-14 sm:px-6 sm:pt-20">
-        <div className="max-w-3xl">
-          <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-amber-500/90">
-            Post-quantum issuance · Bitcoin ownership
-          </p>
-          <h1 className="text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
-            Every unit has a cryptographic birth certificate.
+      <section className="mx-auto max-w-6xl px-4 pb-16 pt-12 sm:px-6 sm:pt-16">
+        <div className="max-w-2xl">
+          <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
+            Serials, not supply fields.
           </h1>
-          <p className="mt-5 text-lg text-zinc-400">
-            Not mint amount. One XMSS state consumed → one serial born → ownership on Bitcoin UTXOs.
+          <p className="mt-4 text-zinc-400">
+            Each issuance burns one XMSS index and births one numbered unit. Trade like dollars, prove like banknotes.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/explorer"
-              className="rounded-full bg-amber-500 px-5 py-2.5 text-sm font-semibold text-black hover:bg-amber-400"
-            >
-              Open Explorer
-            </Link>
-            <Link
-              href="/docs"
-              className="rounded-full border border-zinc-700 px-5 py-2.5 text-sm text-zinc-200 hover:border-zinc-500"
-            >
-              Read Protocol
-            </Link>
+        </div>
+
+        <div className="mt-10">
+          <MintContrast />
+        </div>
+
+        <div className="mt-10 grid gap-4 lg:grid-cols-5">
+          <div className="card p-5 lg:col-span-3">
+            <div className="flex items-center justify-between">
+              <h2 className="font-medium">Live state tape · {featured.symbol}</h2>
+              <Link href={`/asset/${featured.id}`} className="text-xs text-amber-400">Domain →</Link>
+            </div>
+            <div className="mt-4">
+              <StateTape
+                issued={featured.issued}
+                nextSerial={featured.nextSerial}
+                highlightSerials={[0, 481, featured.nextSerial]}
+              />
+            </div>
+            <p className="mt-4 text-sm text-zinc-500">
+              Next ISSUE will consume signing state{" "}
+              <span className="font-mono text-amber-300">#{formatNumber(featured.nextSerial)}</span> and assign serial{" "}
+              <span className="font-mono text-zinc-200">#{formatNumber(featured.nextSerial)}</span> to a Bitcoin output.
+            </p>
+          </div>
+
+          <div className="lg:col-span-2">
+            <WalletLayers wallet={walletPreview} />
           </div>
         </div>
 
-        <div className="mt-14 grid gap-4 lg:grid-cols-3">
-          <div className="card p-5 lg:col-span-2">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <p className="text-sm text-zinc-500">Featured asset</p>
-                <h2 className="mt-1 text-2xl font-semibold">{featured.symbol}</h2>
-                <p className="text-sm text-zinc-400">{featured.name}</p>
-              </div>
-              <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-xs text-emerald-300">
-                PQ Verified
-              </span>
+        <div className="mt-10 grid gap-4 lg:grid-cols-2">
+          <div className="card p-5">
+            <div className="flex items-center justify-between">
+              <h2 className="font-medium">Birth ledger</h2>
+              <Link href="/births" className="text-xs text-amber-400">All events →</Link>
             </div>
-            <div className="mt-6 space-y-2">
-              <div className="flex justify-between text-sm">
-                <span className="text-zinc-500">Issued</span>
-                <span>
-                  {formatNumber(featured.issued)} / {formatNumber(featured.maxSerials)} (
-                  {formatPercent(featured.issued, featured.maxSerials)})
-                </span>
-              </div>
-              <ProgressBar value={featured.issued} max={featured.maxSerials} />
-            </div>
-            <dl className="mt-6 grid gap-3 text-sm sm:grid-cols-2">
-              <div>
-                <dt className="text-zinc-500">Next serial</dt>
-                <dd className="font-mono">#{formatNumber(featured.nextSerial)}</dd>
-              </div>
-              <div>
-                <dt className="text-zinc-500">Policy</dt>
-                <dd>{policyLabel(featured.policy)}</dd>
-              </div>
-            </dl>
-            <Link href={`/asset/${featured.id}`} className="mt-6 inline-block text-sm text-amber-400 hover:text-amber-300">
-              View asset →
-            </Link>
+            <BirthFeed events={birthEvents.slice(0, 3)} compact />
           </div>
 
           <div className="card p-5">
-            <p className="text-sm text-zinc-500">Fair launch round</p>
-            <h3 className="mt-1 text-xl font-semibold">{round.symbol}</h3>
-            <dl className="mt-5 space-y-3 text-sm">
+            <h2 className="font-medium">Block lottery round</h2>
+            <p className="mt-1 text-sm text-zinc-500">
+              Block {formatNumber(round.revealBlock)} hash ranks {formatNumber(round.batchSize)} winners for serials{" "}
+              {formatNumber(round.serialStart)}–{formatNumber(round.serialEnd)}.
+            </p>
+            <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
               <div>
-                <dt className="text-zinc-500">BTC anchor block</dt>
-                <dd className="font-mono">{formatNumber(round.anchorBlock)}</dd>
-              </div>
-              <div>
-                <dt className="text-zinc-500">Serials</dt>
-                <dd className="font-mono">
-                  #{formatNumber(round.serialStart)} — #{formatNumber(round.serialEnd)}
-                </dd>
-              </div>
-              <div>
-                <dt className="text-zinc-500">Participants</dt>
+                <dt className="text-zinc-500">Claims</dt>
                 <dd>{formatNumber(round.participants)}</dd>
               </div>
+              <div>
+                <dt className="text-zinc-500">Anchor</dt>
+                <dd className="font-mono">{formatNumber(round.anchorBlock)}</dd>
+              </div>
             </dl>
-            <Link href="/launch" className="mt-6 block rounded-lg bg-zinc-800 py-2.5 text-center text-sm font-medium hover:bg-zinc-700">
-              Enter round
+            <Link href="/launch" className="mt-5 block rounded-lg bg-amber-500 py-2.5 text-center text-sm font-semibold text-black">
+              View scores & claim
             </Link>
           </div>
-        </div>
-
-        <div className="mt-10 grid gap-4 sm:grid-cols-3">
-          {[
-            { title: "PQ = issuance", body: "XMSS signs birth. Transfer uses Bitcoin only." },
-            { title: "One root = one asset", body: "Capacity is 2^h under that Genesis root, not global." },
-            { title: "Serial + FT", body: "Homogeneous markets with per-unit provenance." },
-          ].map((item) => (
-            <div key={item.title} className="card p-5">
-              <h3 className="font-medium">{item.title}</h3>
-              <p className="mt-2 text-sm text-zinc-400">{item.body}</p>
-            </div>
-          ))}
         </div>
       </section>
     </div>
