@@ -1,16 +1,17 @@
 import { BirthFeed } from "@/components/birth-feed";
+import { SketchFrame } from "@/components/sketch-frame";
 import { birthEvents } from "@/lib/data";
 
 export default function BirthsPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-      <h1 className="text-3xl font-semibold">Birth ledger</h1>
-      <p className="mt-2 text-zinc-400">
-        Chronological ISSUE events: XMSS index burned → serial born → Bitcoin UTXO owner. No batch mint rows.
+    <div className="page max-w-3xl py-12">
+      <h1 className="font-display text-4xl">Birth log</h1>
+      <p className="mt-3 font-hand text-xl text-[var(--ink-muted)]">
+        Chronological ISSUE events — index burned, serial born, output bound.
       </p>
-      <div className="card mt-8 px-5">
+      <SketchFrame className="mt-8" label="register">
         <BirthFeed events={birthEvents} />
-      </div>
+      </SketchFrame>
     </div>
   );
 }

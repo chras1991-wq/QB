@@ -1,41 +1,31 @@
 import Link from "next/link";
+import { SketchFrame } from "@/components/sketch-frame";
 
 const ops = [
-  { code: "GENESIS", desc: "Bind one XMSS root to one AssetID." },
-  { code: "ISSUE", desc: "Consume signing state #n; birth serial #n." },
-  { code: "TRANSFER", desc: "Move ownership via Bitcoin UTXO spend." },
-  { code: "CLOSE", desc: "Stop further issuance." },
+  { code: "GENESIS", desc: "One XMSS root bound to one AssetID." },
+  { code: "ISSUE", desc: "Burn index n; birth serial #n." },
+  { code: "TRANSFER", desc: "UTXO ownership only." },
+  { code: "CLOSE", desc: "Cease issuance." },
 ];
 
 export default function DocsPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-      <h1 className="text-3xl font-semibold">Protocol</h1>
-      <p className="mt-2 text-zinc-400">QXA V1 — preview site mirrors the repo spec.</p>
-
-      <div className="card mt-8 p-5">
-        <h2 className="font-medium">Operations</h2>
-        <ul className="mt-4 space-y-3 text-sm">
+    <div className="page max-w-2xl py-12">
+      <h1 className="font-display text-4xl">Protocol notes</h1>
+      <SketchFrame className="mt-8" label="operations">
+        <ul className="space-y-4 font-hand text-lg">
           {ops.map((o) => (
-            <li key={o.code} className="flex gap-3">
-              <span className="font-mono text-amber-400">{o.code}</span>
-              <span className="text-zinc-300">{o.desc}</span>
+            <li key={o.code}>
+              <span className="font-data text-[var(--accent)]">{o.code}</span> — {o.desc}
             </li>
           ))}
         </ul>
-      </div>
-
-      <div className="card mt-4 space-y-2 p-5 text-sm text-zinc-400">
-        <p>Bitcoin: ordering, ownership, DA.</p>
-        <p>XMSS: issuance authority only.</p>
-        <p>Reorg: Bitcoin issuance may revert; XMSS index never reused.</p>
-      </div>
-
-      <Link
-        href="https://github.com/chras1991-wq/QB/tree/main/qxa-spec"
-        className="mt-6 inline-block text-sm text-amber-400 hover:text-amber-300"
-      >
-        Full spec on GitHub →
+      </SketchFrame>
+      <p className="mt-6 font-hand text-lg text-[var(--ink-muted)]">
+        Reorg may revert Bitcoin birth; XMSS index never reused.
+      </p>
+      <Link href="https://github.com/chras1991-wq/QB/tree/main/qxa-spec" className="mt-6 inline-block text-link font-hand text-xl">
+        full spec →
       </Link>
     </div>
   );

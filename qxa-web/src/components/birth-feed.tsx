@@ -4,35 +4,28 @@ import { formatNumber, truncateMiddle } from "@/lib/format";
 
 export function BirthFeed({ events, compact = false }: { events: BirthEvent[]; compact?: boolean }) {
   return (
-    <ul className="divide-y divide-zinc-800/80">
+    <ol className="divide-y divide-[var(--rule)]">
       {events.map((e) => (
-        <li key={e.id} className={`flex gap-3 ${compact ? "py-3" : "py-4"}`}>
-          <div className="flex h-10 w-10 shrink-0 flex-col items-center justify-center rounded-lg border border-red-500/30 bg-red-500/5 text-[10px] leading-tight text-red-300">
-            <span className="text-[9px] uppercase">burn</span>
-            <span className="font-mono font-semibold">{e.xmssIndex}</span>
-          </div>
-          <div className="min-w-0 flex-1">
-            <div className="flex flex-wrap items-center gap-2">
-              <Link
-                href={`/unit/${e.assetId}/${e.serial}`}
-                className="font-mono text-sm font-semibold text-zinc-100 hover:text-amber-300"
-              >
-                {e.symbol} #{formatNumber(e.serial)}
-              </Link>
-              <span className="text-xs text-zinc-600">born</span>
-              <span className="rounded bg-zinc-800 px-1.5 py-0.5 font-mono text-[10px] text-zinc-400">
-                block {formatNumber(e.block)}
-              </span>
+        <li key={e.id} className="grid gap-2 py-4 sm:grid-cols-[5rem_1fr_auto]">
+          {!compact && (
+            <div className="font-hand text-sm text-[var(--ink-muted)]">
+              burn
+              <span className="ml-1 font-data text-[var(--ink)]">{formatNumber(e.xmssIndex)}</span>
             </div>
+          )}
+          <div>
+            <Link href={`/unit/${e.assetId}/${e.serial}`} className="text-link font-display text-xl">
+              {e.symbol} #{formatNumber(e.serial)}
+            </Link>
             {!compact && (
-              <p className="mt-1 text-xs text-zinc-500">
-                ISSUE verified · tx {truncateMiddle(e.txid, 8, 8)} → {e.recipient}
+              <p className="mt-1 font-data text-[11px] text-[var(--ink-muted)]">
+                blk {formatNumber(e.block)} · {truncateMiddle(e.txid, 6, 6)}
               </p>
             )}
           </div>
-          <span className="shrink-0 text-xs text-zinc-600">{e.at}</span>
+          <time className="font-hand text-sm text-[var(--ink-faint)]">{e.at}</time>
         </li>
       ))}
-    </ul>
+    </ol>
   );
 }

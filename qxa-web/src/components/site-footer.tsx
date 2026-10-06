@@ -1,11 +1,9 @@
 export function SiteFooter() {
   return (
-    <footer className="border-t border-zinc-800/80 py-10 text-sm text-zinc-500">
-      <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-        <p>QXA — Cryptographically Serialized Assets on Bitcoin</p>
-        <p className="text-xs text-zinc-600">
-          RFC 8391 XMSS issuance · NIST SP 800-208 not claimed · Signet preview
-        </p>
+    <footer className="mt-20 border-t border-[var(--ink)]/15">
+      <div className="page flex flex-col gap-1 py-10 font-hand text-lg text-[var(--ink-muted)] sm:flex-row sm:justify-between">
+        <p>Field notes · serialized issuance on Bitcoin</p>
+        <p className="font-data text-xs">XMSS RFC 8391 · preview</p>
       </div>
     </footer>
   );

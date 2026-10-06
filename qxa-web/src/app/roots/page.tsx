@@ -9,12 +9,12 @@ export default function RootsPage() {
   });
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-      <h1 className="text-3xl font-semibold">Genesis roots</h1>
-      <p className="mt-2 max-w-2xl text-zinc-400">
-        Each root is its own asset domain. Capacity is 2<sup>h</sup> XMSS states — not a global mint cap. A new root cannot inflate an existing asset.
+    <div className="page py-12">
+      <h1 className="font-display text-4xl">Genesis roots</h1>
+      <p className="mt-3 max-w-xl font-hand text-xl text-[var(--ink-muted)]">
+        One root per asset domain. Capacity is finite in the tree — not a global mint knob.
       </p>
-      <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-10 grid gap-8 md:grid-cols-2">
         {sorted.map((a) => (
           <RootCard key={a.id} asset={a} />
         ))}

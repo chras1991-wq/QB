@@ -1,70 +1,59 @@
 "use client";
 
 import { useState } from "react";
+import { SketchFrame } from "@/components/sketch-frame";
 
 export default function CreatePage() {
   const [symbol, setSymbol] = useState("QX");
   const [height, setHeight] = useState(12);
   const [policy, setPolicy] = useState("block_lottery_v1");
-
   const capacity = 2 ** height;
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-      <h1 className="text-3xl font-semibold">Create Genesis</h1>
-      <p className="mt-2 text-zinc-400">Define an issuance domain bound to one XMSS root.</p>
+    <div className="page max-w-xl py-12">
+      <h1 className="font-display text-4xl">New genesis</h1>
+      <p className="mt-3 font-hand text-xl text-[var(--ink-muted)]">Register a root and its signing budget.</p>
 
-      <form
-        className="card mt-8 space-y-5 p-5"
-        onSubmit={(e) => {
-          e.preventDefault();
-          alert("Genesis flow connects to signer + Bitcoin in Signet phase.");
-        }}
-      >
-        <label className="block text-sm">
-          <span className="text-zinc-500">Symbol</span>
-          <input
-            value={symbol}
-            onChange={(e) => setSymbol(e.target.value.toUpperCase())}
-            maxLength={12}
-            className="mt-2 w-full rounded-lg border border-zinc-700 bg-zinc-950 px-3 py-2 outline-none focus:border-amber-500/60"
-          />
-        </label>
-
-        <label className="block text-sm">
-          <span className="text-zinc-500">Tree height (h)</span>
-          <input
-            type="number"
-            min={10}
-            max={20}
-            value={height}
-            onChange={(e) => setHeight(Number(e.target.value))}
-            className="mt-2 w-full rounded-lg border border-zinc-700 bg-zinc-950 px-3 py-2 outline-none focus:border-amber-500/60"
-          />
-          <p className="mt-1 text-xs text-zinc-500">Cryptographic capacity: {capacity.toLocaleString()} issuances</p>
-        </label>
-
-        <label className="block text-sm">
-          <span className="text-zinc-500">Issuance policy</span>
-          <select
-            value={policy}
-            onChange={(e) => setPolicy(e.target.value)}
-            className="mt-2 w-full rounded-lg border border-zinc-700 bg-zinc-950 px-3 py-2 outline-none focus:border-amber-500/60"
-          >
-            <option value="sequential">Sequential issuer</option>
-            <option value="block_lottery_v1">Bitcoin block lottery</option>
-          </select>
-        </label>
-
-        <div className="rounded-lg border border-zinc-800 bg-zinc-950/50 p-4 text-sm text-zinc-400">
-          <p>PQ scheme: XMSS (RFC 8391)</p>
-          <p className="mt-1">A new root always yields a new AssetID — no cross-asset inflation.</p>
-        </div>
-
-        <button type="submit" className="w-full rounded-lg bg-amber-500 py-2.5 text-sm font-semibold text-black hover:bg-amber-400">
-          Create Genesis
-        </button>
-      </form>
+      <SketchFrame className="mt-8" label="parameters">
+        <form
+          className="space-y-5"
+          onSubmit={(e) => {
+            e.preventDefault();
+            alert("Signer + Bitcoin hookup on Signet.");
+          }}
+        >
+          <label>
+            <span className="font-hand text-lg text-[var(--ink-muted)]">symbol</span>
+            <input value={symbol} onChange={(e) => setSymbol(e.target.value.toUpperCase())} className="field-line" maxLength={12} />
+          </label>
+          <label>
+            <span className="font-hand text-lg text-[var(--ink-muted)]">tree height h</span>
+            <input
+              type="number"
+              min={10}
+              max={20}
+              value={height}
+              onChange={(e) => setHeight(Number(e.target.value))}
+              className="field-line"
+            />
+            <p className="mt-1 font-hand text-[var(--ink-muted)]">{capacity.toLocaleString()} signable indexes</p>
+          </label>
+          <label>
+            <span className="font-hand text-lg text-[var(--ink-muted)]">policy</span>
+            <select
+              value={policy}
+              onChange={(e) => setPolicy(e.target.value)}
+              className="field-line font-hand text-lg"
+            >
+              <option value="sequential">sequential issuer</option>
+              <option value="block_lottery_v1">block lottery</option>
+            </select>
+          </label>
+          <button type="submit" className="btn btn-solid w-full text-center">
+            commit genesis
+          </button>
+        </form>
+      </SketchFrame>
     </div>
   );
 }

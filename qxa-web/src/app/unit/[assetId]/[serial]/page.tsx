@@ -32,55 +32,48 @@ export default async function UnitPage({
     };
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-10 sm:px-6">
-      <div className="certificate-border rounded-2xl bg-zinc-950/80 p-6 sm:p-8">
-        <p className="text-center text-[10px] uppercase tracking-[0.35em] text-amber-500/80">Birth certificate</p>
-        <h1 className="mt-3 text-center font-mono text-4xl font-semibold tracking-tight">
+    <div className="page max-w-2xl py-12">
+      <article className="certificate px-6 py-8 sm:px-10 sm:py-10">
+        <p className="text-center font-hand text-xl text-[var(--ink-muted)]">Specimen record</p>
+        <h1 className="mt-2 text-center font-display text-4xl">
           {unit.symbol} #{formatNumber(unit.serial)}
         </h1>
 
-        <div className="mt-8 space-y-4 text-sm">
-          <div className="flex justify-between border-b border-zinc-800 py-3">
-            <span className="text-zinc-500">XMSS index consumed</span>
-            <span className="font-mono text-red-300 line-through decoration-red-500">{unit.xmssIndex}</span>
-          </div>
-          <div className="flex justify-between border-b border-zinc-800 py-3">
-            <span className="text-zinc-500">Serial born</span>
-            <span className="font-mono">#{formatNumber(unit.serial)}</span>
-          </div>
-          <div className="flex justify-between border-b border-zinc-800 py-3">
-            <span className="text-zinc-500">Bitcoin block</span>
-            <span className="font-mono">{formatNumber(unit.birthBlock)}</span>
-          </div>
-          <div className="border-b border-zinc-800 py-3">
-            <p className="text-zinc-500">Genesis root</p>
-            <p className="mt-1 break-all font-mono text-[10px] text-zinc-400">{asset.pqRoot}</p>
-          </div>
-          <div className="border-b border-zinc-800 py-3">
-            <p className="text-zinc-500">PQ issuance</p>
-            <p className="mt-1 text-emerald-300">
-              {unit.pqVerified ? "XMSS detached signature verified (ISSUE)" : "Unissued serial — no burned state"}
-            </p>
-          </div>
-          <div className="py-3">
-            <p className="text-zinc-500">Owner (Bitcoin UTXO)</p>
-            <p className="mt-1 break-all font-mono text-xs">{unit.owner}</p>
-            <p className="mt-1 text-xs text-zinc-600">Transfers do not touch XMSS — only this UTXO chain.</p>
-          </div>
-        </div>
+        <table className="mt-10 w-full text-sm">
+          <tbody className="font-hand text-lg">
+            <tr className="border-b border-dashed border-[var(--rule-strong)]">
+              <td className="py-3 text-[var(--ink-muted)]">XMSS index consumed</td>
+              <td className="py-3 text-right font-data line-through decoration-[var(--ink)]">{unit.xmssIndex}</td>
+            </tr>
+            <tr className="border-b border-dashed border-[var(--rule-strong)]">
+              <td className="py-3 text-[var(--ink-muted)]">Birth block</td>
+              <td className="py-3 text-right font-data">{formatNumber(unit.birthBlock)}</td>
+            </tr>
+            <tr className="border-b border-dashed border-[var(--rule-strong)]">
+              <td className="py-3 text-[var(--ink-muted)]">PQ issuance</td>
+              <td className="py-3 text-right">
+                {unit.pqVerified ? "verified ISSUE" : "unissued"}
+              </td>
+            </tr>
+            <tr>
+              <td className="py-3 align-top text-[var(--ink-muted)]">Owner UTXO</td>
+              <td className="py-3 text-right font-data text-[11px] break-all">{unit.owner}</td>
+            </tr>
+          </tbody>
+        </table>
 
-        <div className="mt-6 flex flex-wrap gap-2">
-          <CopyButton text={unit.birthTxid} label="Copy birth tx" />
-          <Link href={`/asset/${assetId}`} className="rounded-md border border-zinc-700 px-2.5 py-1 text-xs text-zinc-300">
-            Domain
-          </Link>
+        <p className="mt-6 font-data text-[10px] leading-relaxed text-[var(--ink-faint)] break-all">{asset.pqRoot}</p>
+
+        <div className="mt-6 flex flex-wrap gap-4">
+          <CopyButton text={unit.birthTxid} label="copy birth tx" />
+          <Link href={`/asset/${assetId}`} className="text-link font-hand text-lg">domain</Link>
         </div>
 
         {unit.tags.length > 0 && (
-          <p className="mt-6 text-center text-xs uppercase tracking-wider text-amber-400/90">{unit.tags.join(" · ")}</p>
+          <p className="mt-8 text-center font-hand text-[var(--ink-muted)]">{unit.tags.join(" · ")}</p>
         )}
-      </div>
-      <p className="mt-4 text-center text-xs text-zinc-600">tx {truncateMiddle(unit.birthTxid, 12, 12)}</p>
+      </article>
+      <p className="mt-4 text-center font-data text-xs text-[var(--ink-faint)]">{truncateMiddle(unit.birthTxid, 12, 12)}</p>
     </div>
   );
 }
