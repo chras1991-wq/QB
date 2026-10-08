@@ -1,0 +1,13 @@
+{
+  "description": "Synthetic vector for TaggedHash QXA/ISSUE message layout (XMSS sig not included)",
+  "tag": "QXA/ISSUE",
+  "asset_id_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+  "serial": 0,
+  "recipient_script_pubkey_hex": "5120000000000000000000000000000000000000000000000000000000000000000000",
+  "genesis_outpoint": {
+    "txid": "0000000000000000000000000000000000000000000000000000000000000000",
+    "vout": 0
+  },
+  "nonce": 0,
+  "note": "Replace asset_id and keys with outputs from qxa-crypto tests after keygen"
+}

@@ -1,0 +1,23 @@
+[package]
+name = "qxa-signer"
+description = "Atomic XMSS signing state for QXA issuance"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+qxa-crypto = { path = "../qxa-crypto" }
+bitcoin.workspace = true
+hex.workspace = true
+rusqlite.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+xmss.workspace = true
+rand = "0.10"
+
+[dev-dependencies]
+xmss.workspace = true
+rand = "0.10"
+bitcoin_hashes = "0.14"
