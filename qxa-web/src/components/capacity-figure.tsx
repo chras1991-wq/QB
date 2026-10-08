@@ -3,7 +3,7 @@ import { formatNumber } from "@/lib/format";
 export function CapacityFigure({
   issued,
   max,
-  caption = "已消耗签名态",
+  caption = "Indexes consumed",
 }: {
   issued: number;
   max: number;
@@ -28,7 +28,7 @@ export function CapacityFigure({
           />
         </svg>
         <p className="font-hand text-xl text-[var(--ink-muted)]">
-          共 <span className="font-data text-base">{formatNumber(max)}</span> 格
+          of <span className="font-data text-base">{formatNumber(max)}</span> slots
         </p>
       </div>
     </div>

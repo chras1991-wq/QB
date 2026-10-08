@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 const links = [
-  { href: "/births", label: "出生记录" },
-  { href: "/roots", label: "根目录" },
-  { href: "/wallet", label: "钱包" },
-  { href: "/launch", label: "抽签" },
+  { href: "/births", label: "Births" },
+  { href: "/roots", label: "Roots" },
+  { href: "/wallet", label: "Wallet" },
+  { href: "/launch", label: "Lottery" },
 ];
 
 export function SiteHeader() {
@@ -27,7 +27,7 @@ export function SiteHeader() {
           ))}
         </nav>
         <Link href="/launch" className="btn btn-solid text-lg">
-          下一区块
+          Next block
         </Link>
       </div>
     </header>

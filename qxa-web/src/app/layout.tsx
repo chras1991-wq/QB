@@ -34,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN">
+    <html lang="en">
       <body
         className={`${caveat.variable} ${patrickHand.variable} ${ibmMono.variable} min-h-screen antialiased`}
       >

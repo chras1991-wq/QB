@@ -23,9 +23,9 @@ export function IndexRaster({
   return (
     <div>
       <div className="flex items-baseline justify-between gap-4">
-        <p className="font-hand text-xl text-[var(--ink-muted)]">图 1 · XMSS 索引场（抽样）</p>
+        <p className="font-hand text-xl text-[var(--ink-muted)]">Fig. 1 — XMSS index field (sampled)</p>
         <p className="font-hand text-lg text-[var(--ink-muted)]">
-          笔尖 <span className="font-data text-[var(--ink)]">{formatNumber(nextSerial)}</span>
+          head <span className="font-data text-[var(--ink)]">{formatNumber(nextSerial)}</span>
         </p>
       </div>
       <svg
@@ -57,7 +57,7 @@ export function IndexRaster({
         ))}
       </svg>
       <p className="mt-3 font-hand text-lg leading-snug text-[var(--ink-muted)]">
-        斜线 = 已耗尽的签名态；黑块 = 下一刀 ISSUE。不是进度条。
+        Hatch = burned signing state. Solid tick = next ISSUE. Not a progress bar.
       </p>
     </div>
   );
