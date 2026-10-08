@@ -1,0 +1,30 @@
+[package]
+name = "qxa-node"
+description = "QXA regtest/signet issuer, indexer sync, and HTTP API"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "qxa-node"
+path = "src/main.rs"
+
+[dependencies]
+qxa-crypto = { path = "../qxa-crypto" }
+qxa-indexer = { path = "../qxa-indexer" }
+qxa-signer = { path = "../qxa-signer" }
+bitcoin.workspace = true
+bitcoincore-rpc = "0.19"
+clap = { version = "4", features = ["derive", "env"] }
+hex.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+thiserror.workspace = true
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+axum = "0.8"
+tower-http = { version = "0.6", features = ["cors"] }
+xmss.workspace = true
+rand.workspace = true
+rusqlite.workspace = true

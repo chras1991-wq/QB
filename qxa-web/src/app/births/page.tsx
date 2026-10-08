@@ -1,8 +1,9 @@
 import { BirthFeed } from "@/components/birth-feed";
 import { SketchFrame } from "@/components/sketch-frame";
-import { birthEvents } from "@/lib/data";
+import { loadBirthEvents } from "@/lib/catalog";
 
-export default function BirthsPage() {
+export default async function BirthsPage() {
+  const birthEvents = await loadBirthEvents();
   return (
     <div className="page max-w-3xl py-12">
       <h1 className="font-display text-4xl">Birth log</h1>

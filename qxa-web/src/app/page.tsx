@@ -6,10 +6,13 @@ import { IssueSchematic } from "@/components/issue-schematic";
 import { MintContrast } from "@/components/mint-contrast";
 import { SketchFrame } from "@/components/sketch-frame";
 import { WalletLayers } from "@/components/wallet-layers";
-import { assets, birthEvents, launchRounds, walletPreview } from "@/lib/data";
+import { launchRounds, walletPreview } from "@/lib/data";
+import { loadAssets, loadBirthEvents } from "@/lib/catalog";
 import { formatNumber } from "@/lib/format";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const assets = await loadAssets();
+  const birthEvents = await loadBirthEvents(assets);
   const featured = assets[0];
   const round = launchRounds[0];
 

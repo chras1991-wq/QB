@@ -12,7 +12,8 @@ fn reserved_index_not_reused_after_failed_sign_simulation() {
     let dir = tempfile_dir();
     let db_path = dir.join("signer.db");
     let mut rng = rand::rng();
-    let kp = KeyPair::<XmssSha2_10_256>::generate(&mut rng).unwrap();
+    let mut kp = KeyPair::<XmssSha2_10_256>::generate(&mut rng).unwrap();
+    let sk = kp.signing_key().clone();
     let vk = kp.verifying_key().as_ref().to_vec();
     let genesis = OutPoint {
         txid: Txid::all_zeros(),
@@ -20,7 +21,7 @@ fn reserved_index_not_reused_after_failed_sign_simulation() {
     };
     let asset_id = compute_asset_id(genesis, &xmss_public_root(&vk).unwrap());
 
-    let mut signer = XmssSigner::open(&db_path, kp).unwrap();
+    let mut signer = XmssSigner::open(&db_path, sk).unwrap();
     let sig = signer
         .issue(IssueRequest {
             asset_id,

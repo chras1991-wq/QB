@@ -1,7 +1,8 @@
 import { RootCard } from "@/components/root-card";
-import { assets } from "@/lib/data";
+import { loadAssets } from "@/lib/catalog";
 
-export default function RootsPage() {
+export default async function RootsPage() {
+  const assets = await loadAssets();
   const sorted = [...assets].sort((a, b) => {
     if (a.issued === 0 && b.issued > 0) return -1;
     if (b.issued === 0 && a.issued > 0) return 1;

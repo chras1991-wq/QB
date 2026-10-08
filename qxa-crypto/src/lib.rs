@@ -9,6 +9,7 @@ mod hash;
 mod issue;
 mod params;
 mod protocol;
+mod wire;
 mod xmss_root;
 
 pub use asset_id::{compute_asset_id, AssetId};
@@ -19,4 +20,5 @@ pub use params::{ParameterSetId, QxaParameterSet, DEFAULT_PARAMETER_SET};
 pub use protocol::{
     GenesisPayload, IssuancePolicy, Operation, ProtocolCommitment, TransferPayload,
 };
+pub use wire::{IssuePacket, QxaOpReturn, try_parse_qxa_op_return};
 pub use xmss_root::xmss_public_root;

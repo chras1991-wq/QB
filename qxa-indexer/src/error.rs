@@ -16,4 +16,8 @@ pub enum IndexerError {
     InvalidIssueProof,
     #[error("range overlap")]
     RangeOverlap,
+    #[error("database: {0}")]
+    Db(String),
+    #[error("invalid transaction: {0}")]
+    InvalidTx(String),
 }

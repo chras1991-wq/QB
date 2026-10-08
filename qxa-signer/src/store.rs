@@ -3,7 +3,7 @@ use std::path::Path;
 use bitcoin::OutPoint;
 use qxa_crypto::{sign_issue, AssetId, IssueProof};
 use rusqlite::{params, Connection};
-use xmss::{KeyPair, SigningKey, XmssSha2_10_256};
+use xmss::{SigningKey, XmssSha2_10_256};
 
 use crate::error::SignerError;
 
@@ -23,11 +23,7 @@ pub struct XmssSigner {
 }
 
 impl XmssSigner {
-    pub fn open(
-        path: impl AsRef<Path>,
-        mut keypair: KeyPair<XmssSha2_10_256>,
-    ) -> Result<Self, SignerError> {
-        let signing_key = keypair.signing_key().clone();
+    pub fn open(path: impl AsRef<Path>, signing_key: SigningKey<XmssSha2_10_256>) -> Result<Self, SignerError> {
         let db = Connection::open(path).map_err(|e| SignerError::Db(e.to_string()))?;
         db.execute_batch(
             "
