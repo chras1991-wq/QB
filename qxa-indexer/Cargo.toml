@@ -1,0 +1,21 @@
+[package]
+name = "qxa-indexer"
+description = "QXA protocol indexer state machine (Bitcoin adapter in progress)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+qxa-crypto = { path = "../qxa-crypto" }
+bitcoin.workspace = true
+hex.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+rusqlite.workspace = true
+
+[dev-dependencies]
+xmss.workspace = true
+rand = "0.10"
+bitcoin_hashes = "0.14"

@@ -1,0 +1,32 @@
+[workspace]
+resolver = "2"
+members = [
+    "qxa-crypto",
+    "qxa-signer",
+    "qxa-indexer",
+    "qxa-wallet-sdk",
+    "qxa-node",
+]
+default-members = ["qxa-crypto", "qxa-signer", "qxa-indexer", "qxa-node"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/chras1991-wq/QB"
+
+[workspace.dependencies]
+bitcoin = { version = "0.32", default-features = false, features = ["std"] }
+hex = "0.4"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+thiserror = "2"
+xmss = "0.1.0-pre.0"
+rand = "0.10"
+rusqlite = { version = "0.32", features = ["bundled"] }
+bitcoincore-rpc = "0.19"
+axum = "0.8"
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+tower-http = { version = "0.6", features = ["cors"] }
+clap = { version = "4", features = ["derive"] }

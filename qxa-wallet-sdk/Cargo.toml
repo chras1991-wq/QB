@@ -1,0 +1,12 @@
+[package]
+name = "qxa-wallet-sdk"
+description = "Wallet-facing types and helpers for QXA (V1 scaffold)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+qxa-crypto = { path = "../qxa-crypto" }
+bitcoin.workspace = true
+serde.workspace = true
