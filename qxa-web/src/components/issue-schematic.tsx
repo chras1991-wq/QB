@@ -1,50 +1,46 @@
-/** Hand-drawn lab diagram: XMSS burn → serial → UTXO */
 export function IssueSchematic() {
   return (
-    <svg viewBox="0 0 520 120" className="w-full max-w-xl text-[var(--ink)]" aria-label="Issuance schematic">
-      <g filter="url(#ink-roughen)" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round">
-        <rect x="8" y="28" width="88" height="64" rx="2" />
-        <text x="52" y="52" textAnchor="middle" className="font-hand fill-[var(--ink)] text-[11px]" stroke="none">
+    <svg viewBox="0 0 520 130" className="w-full max-w-2xl text-[var(--ink)]" aria-label="Issuance schematic">
+      <g filter="url(#ink-roughen)" fill="none" stroke="currentColor" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M 10 32 Q 8 28, 12 26 L 90 24 Q 96 24, 94 32 L 92 88 Q 90 94, 14 92 L 10 32 Z" />
+        <path d="M 160 26 Q 156 22, 164 24 L 238 22 Q 244 22, 242 30 L 240 90 Q 238 96, 162 94 L 160 26 Z" />
+        <path d="M 306 24 Q 302 20, 310 22 L 396 20 Q 402 20, 400 28 L 398 88 Q 396 94, 308 92 L 306 24 Z" />
+
+        <path d="M 98 58 Q 120 52, 152 58" markerEnd="url(#arrowhead)" />
+        <path d="M 246 58 Q 268 62, 298 58" markerEnd="url(#arrowhead)" />
+        <path d="M 404 58 Q 430 54, 448 58" strokeDasharray="5 4" />
+
+        <text x="52" y="58" textAnchor="middle" fill="var(--ink)" stroke="none" style={{ fontFamily: "var(--font-caveat)", fontSize: 18 }}>
           XMSS
         </text>
-        <text x="52" y="72" textAnchor="middle" className="font-data fill-[var(--ink-muted)] text-[9px]" stroke="none">
+        <text x="52" y="78" textAnchor="middle" fill="var(--ink-muted)" stroke="none" style={{ fontFamily: "var(--font-patrick-hand)", fontSize: 13 }}>
           idx n
         </text>
-
-        <path d="M 108 60 H 155" markerEnd="url(#arrowhead)" />
-        <text x="130" y="48" textAnchor="middle" className="font-hand fill-[var(--ink-faint)] text-[10px]" stroke="none">
-          burn
-        </text>
-
-        <rect x="158" y="28" width="88" height="64" rx="2" />
-        <text x="202" y="58" textAnchor="middle" className="font-hand fill-[var(--ink)] text-[11px]" stroke="none">
+        <text x="200" y="62" textAnchor="middle" fill="var(--ink)" stroke="none" style={{ fontFamily: "var(--font-caveat)", fontSize: 17 }}>
           Unit #n
         </text>
-
-        <path d="M 254 60 H 301" />
-        <text x="276" y="48" textAnchor="middle" className="font-hand fill-[var(--ink-faint)] text-[10px]" stroke="none">
-          bind
-        </text>
-
-        <rect x="304" y="28" width="100" height="64" rx="2" />
-        <text x="354" y="52" textAnchor="middle" className="font-hand fill-[var(--ink)] text-[11px]" stroke="none">
+        <text x="352" y="58" textAnchor="middle" fill="var(--ink)" stroke="none" style={{ fontFamily: "var(--font-caveat)", fontSize: 18 }}>
           Bitcoin
         </text>
-        <text x="354" y="72" textAnchor="middle" className="font-data fill-[var(--ink-muted)] text-[9px]" stroke="none">
+        <text x="352" y="78" textAnchor="middle" fill="var(--ink-muted)" stroke="none" style={{ fontFamily: "var(--font-patrick-hand)", fontSize: 12 }}>
           UTXO
         </text>
-
-        <path d="M 412 60 H 455" strokeDasharray="4 3" />
-        <text x="478" y="64" className="font-hand fill-[var(--ink-muted)] text-[10px]" stroke="none">
+        <text x="128" y="48" textAnchor="middle" fill="var(--ink-faint)" stroke="none" style={{ fontFamily: "var(--font-patrick-hand)", fontSize: 14 }}>
+          burn
+        </text>
+        <text x="272" y="48" textAnchor="middle" fill="var(--ink-faint)" stroke="none" style={{ fontFamily: "var(--font-patrick-hand)", fontSize: 14 }}>
+          bind
+        </text>
+        <text x="478" y="62" fill="var(--ink-muted)" stroke="none" style={{ fontFamily: "var(--font-patrick-hand)", fontSize: 14 }}>
           transfer
         </text>
-        <text x="478" y="78" className="font-hand fill-[var(--ink-faint)] text-[9px]" stroke="none">
+        <text x="478" y="78" fill="var(--ink-faint)" stroke="none" style={{ fontFamily: "var(--font-patrick-hand)", fontSize: 12 }}>
           (no PQ)
         </text>
       </g>
       <defs>
         <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
-          <path d="M0,0 L8,3 L0,6 Z" fill="var(--ink)" />
+          <path d="M0,1 L7,3 L0,5 Z" fill="var(--ink)" filter="url(#ink-roughen)" />
         </marker>
       </defs>
     </svg>

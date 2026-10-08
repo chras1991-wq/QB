@@ -23,18 +23,18 @@ export function IndexRaster({
   return (
     <div>
       <div className="flex items-baseline justify-between gap-4">
-        <p className="kicker">Fig. 1 — XMSS index field (resampled)</p>
-        <p className="font-hand text-sm text-[var(--ink-muted)]">
-          head <span className="font-data text-[var(--ink)]">{formatNumber(nextSerial)}</span>
+        <p className="font-hand text-xl text-[var(--ink-muted)]">图 1 · XMSS 索引场（抽样）</p>
+        <p className="font-hand text-lg text-[var(--ink-muted)]">
+          笔尖 <span className="font-data text-[var(--ink)]">{formatNumber(nextSerial)}</span>
         </p>
       </div>
       <svg
-        className="mt-3 w-full border border-[var(--ink)] text-[var(--ink)]"
-        style={{ height: 36, filter: "url(#ink-roughen)" }}
-        viewBox={`0 0 ${buckets} 8`}
+        className="mt-3 w-full border-2 border-[var(--ink)] text-[var(--ink)]"
+        style={{ height: 40, filter: "url(#ink-roughen)" }}
+        viewBox={`0 0 ${buckets} 10`}
         preserveAspectRatio="none"
         role="img"
-        aria-label={`${issued} indexes consumed of ${maxSerials}`}
+        aria-label={`${issued} indexes consumed`}
       >
         {cells.map((state, i) => (
           <rect
@@ -42,7 +42,7 @@ export function IndexRaster({
             x={i}
             y={0}
             width={1}
-            height={8}
+            height={10}
             fill={
               state === "burned"
                 ? "url(#hatch)"
@@ -51,13 +51,13 @@ export function IndexRaster({
                   : "var(--paper-elevated)"
             }
             stroke="var(--ink)"
-            strokeWidth={0.05}
-            opacity={state === "open" ? 0.25 : 1}
+            strokeWidth={0.06}
+            opacity={state === "open" ? 0.2 : 1}
           />
         ))}
       </svg>
-      <p className="mt-2 font-hand text-sm leading-snug text-[var(--ink-muted)]">
-        Hatched cells = consumed signing states. Solid tick = next ISSUE. Not a supply bar.
+      <p className="mt-3 font-hand text-lg leading-snug text-[var(--ink-muted)]">
+        斜线 = 已耗尽的签名态；黑块 = 下一刀 ISSUE。不是进度条。
       </p>
     </div>
   );

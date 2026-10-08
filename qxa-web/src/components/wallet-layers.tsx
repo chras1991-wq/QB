@@ -10,26 +10,26 @@ export function WalletLayers({ wallet, defaultOpen = false }: { wallet: WalletPr
   const [open, setOpen] = useState(defaultOpen);
 
   return (
-    <SketchFrame label="wallet strata">
+    <SketchFrame label="钱包分层">
       <button type="button" onClick={() => setOpen((v) => !v)} className="flex w-full items-end justify-between text-left">
         <div>
-          <p className="font-hand text-lg text-[var(--ink-muted)]">quoted</p>
-          <p className="font-display text-4xl">{wallet.displayBalance}</p>
+          <p className="font-hand text-xl text-[var(--ink-muted)]">报价层</p>
+          <p className="font-display text-5xl">{wallet.displayBalance}</p>
         </div>
-        <span className="font-hand text-[var(--ink-muted)]">{open ? "fold" : "unfold serials"}</span>
+        <span className="font-hand text-xl text-[var(--pencil)]">{open ? "收起" : "展开编号"}</span>
       </button>
       {open && (
         <div className="mt-5 border-t border-dashed border-[var(--rule-strong)] pt-4">
-          <p className="kicker">ranges</p>
+          <p className="kicker">区间</p>
           {wallet.ranges.map((r) => (
-            <p key={`${r.start}-${r.end}`} className="mt-1 font-data text-sm">
+            <p key={`${r.start}-${r.end}`} className="mt-1 font-hand text-lg">
               {r.symbol} [{formatNumber(r.start)}–{formatNumber(r.end)}]
             </p>
           ))}
-          <p className="kicker mt-5">singles</p>
-          <div className="mt-2 flex flex-wrap gap-x-4">
+          <p className="kicker mt-5">单枚</p>
+          <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
             {wallet.singles.map((s) => (
-              <Link key={`${s.symbol}-${s.serial}`} href={`/unit/${s.assetId}/${s.serial}`} className="text-link font-data text-sm">
+              <Link key={`${s.symbol}-${s.serial}`} href={`/unit/${s.assetId}/${s.serial}`} className="text-link font-hand text-xl">
                 {s.symbol} #{formatNumber(s.serial)}
               </Link>
             ))}

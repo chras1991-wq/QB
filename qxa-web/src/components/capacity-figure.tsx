@@ -3,23 +3,33 @@ import { formatNumber } from "@/lib/format";
 export function CapacityFigure({
   issued,
   max,
-  caption = "indexes consumed",
+  caption = "已消耗签名态",
 }: {
   issued: number;
   max: number;
   caption?: string;
 }) {
   return (
-    <div className="flex flex-wrap items-end gap-x-8 gap-y-2">
+    <div className="flex flex-wrap items-end gap-x-10 gap-y-3">
       <div>
-        <p className="font-hand text-lg text-[var(--ink-muted)]">{caption}</p>
-        <p className="font-display mt-1 text-5xl leading-none tracking-tight sm:text-6xl">{formatNumber(issued)}</p>
+        <p className="kicker">{caption}</p>
+        <p className="font-display mt-1 text-6xl leading-none sm:text-7xl" style={{ filter: "url(#pencil-smudge)" }}>
+          {formatNumber(issued)}
+        </p>
       </div>
-      <div className="pb-1">
-        <svg width="48" height="24" viewBox="0 0 48 24" className="text-[var(--ink)]" aria-hidden>
-          <line x1="0" y1="12" x2="48" y2="12" stroke="currentColor" strokeWidth="1.2" filter="url(#ink-roughen)" />
+      <div className="pb-2">
+        <svg width="56" height="28" viewBox="0 0 56 28" className="text-[var(--ink)]" aria-hidden>
+          <path
+            d="M 0 14 Q 18 8, 28 16 T 56 12"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            filter="url(#ink-roughen)"
+          />
         </svg>
-        <p className="font-data text-sm text-[var(--ink-muted)]">of {formatNumber(max)}</p>
+        <p className="font-hand text-xl text-[var(--ink-muted)]">
+          共 <span className="font-data text-base">{formatNumber(max)}</span> 格
+        </p>
       </div>
     </div>
   );

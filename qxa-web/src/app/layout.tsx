@@ -1,20 +1,14 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Libre_Baskerville, Libre_Franklin, Patrick_Hand } from "next/font/google";
+import { Caveat, IBM_Plex_Mono, Patrick_Hand } from "next/font/google";
 import { SketchSvgDefs } from "@/components/sketch-svg-defs";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 
-const libreBaskerville = Libre_Baskerville({
-  variable: "--font-libre-baskerville",
+const caveat = Caveat({
+  variable: "--font-caveat",
   subsets: ["latin"],
-  weight: ["400", "700"],
-});
-
-const libreFranklin = Libre_Franklin({
-  variable: "--font-libre-franklin",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["500", "600", "700"],
 });
 
 const patrickHand = Patrick_Hand({
@@ -40,13 +34,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="zh-CN">
       <body
-        className={`${libreBaskerville.variable} ${libreFranklin.variable} ${patrickHand.variable} ${ibmMono.variable} min-h-screen antialiased`}
+        className={`${caveat.variable} ${patrickHand.variable} ${ibmMono.variable} min-h-screen antialiased`}
       >
         <SketchSvgDefs />
+        <div className="paper-noise pointer-events-none fixed inset-0 z-50 opacity-[0.07]" aria-hidden />
         <SiteHeader />
-        <main>{children}</main>
+        <main className="relative z-[1]">{children}</main>
         <SiteFooter />
       </body>
     </html>
